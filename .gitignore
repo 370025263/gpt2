@@ -1,2 +1,6 @@
+gpt2_tokenizer/*
+__pycache__
+data
+wandb
 model.pth
 lightning_logs/*

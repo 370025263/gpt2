@@ -99,7 +99,7 @@ if __name__ == '__main__':
     num_layers = 12
     vocab_size = 50257
     max_seq_len = 1024
-    tokenizer = load_tokenizer('gpt2_sentencepiece')
+    tokenizer = load_tokenizer('tokenizer')
 
     # Load dataset
     cache_dir = os.path.join(os.getcwd(), 'data')
