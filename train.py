@@ -99,7 +99,7 @@ if __name__ == '__main__':
     num_layers = 12
     vocab_size = 50257
     max_seq_len = 1024
-    tokenizer = load_tokenizer('gpt2_sentencepiece')
+    tokenizer = load_tokenizer('tokenizer')
 
     # Load dataset
     cache_dir = os.path.join(os.getcwd(), 'data')
@@ -112,8 +112,8 @@ if __name__ == '__main__':
     train_dataset = TextDataset(train_texts, tokenizer)
     val_dataset = TextDataset(val_texts, tokenizer)
     
-    train_loader = DataLoader(train_dataset, batch_size=12, shuffle=True, num_workers=32)
-    val_loader = DataLoader(val_dataset, batch_size=12, shuffle=False, num_workers=32)
+    train_loader = DataLoader(train_dataset, batch_size=24, shuffle=True, num_workers=32)
+    val_loader = DataLoader(val_dataset, batch_size=24, shuffle=False, num_workers=32)
 
     gpt_model = GPT(dm, num_heads, num_layers, vocab_size, max_seq_len, tokenizer)
     gpt_lightning_module = GPTLightningModule(gpt_model, tokenizer, vocab_size)
@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
     # Initialize trainer with checkpointing, W&B logger, and resume from checkpoint if needed
     trainer = Trainer(
-        max_epochs=100,
+        max_epochs=20,
         accelerator='gpu' if torch.cuda.is_available() else 'cpu',
         devices=-1 if torch.cuda.is_available() else 1,
         callbacks=[custom_checkpoint_callback],
